@@ -39,6 +39,8 @@ namespace BLL.Implementions
                     Subject = new ClaimsIdentity(new Claim[]
                     {
                         new Claim("UserID",user.Id.ToString()),
+                        new Claim("UserName", user.UserName),
+                        new Claim("Email", user.Email),
                         new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
                     }),
                     Expires = DateTime.UtcNow.AddHours(1),
