@@ -67,6 +67,11 @@ namespace BLL.Implementions
             return _mapper.Map<List<PlayerDto>>(Players);
         }
 
+        public IEnumerable<Player> GetAllByTeamId(int teamId)
+        {
+            return _repo.GetWhere(a => a.Team.Id == teamId);   
+        }
+
         public async Task<PlayerDto> GetByIdAsync(int id)
         {
             try

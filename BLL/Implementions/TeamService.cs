@@ -8,15 +8,18 @@ using System.Threading.Tasks;
 
 namespace BLL.Implementions
 {
-    public class TeamService : ITeamService
+    public class TeamService : ITeamService 
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Team> _repo;
+        private readonly IPlayerService _PlayerService;
 
-        public TeamService(IMapper mapper , IRepository<Team> repo )
+
+        public TeamService(IMapper mapper , IRepository<Team> repo , IPlayerService PlayerService)
         {
             _mapper = mapper;
             _repo = repo;
+            _PlayerService = PlayerService;
 
         }
         public async Task<OutPutDto> CreateAsync(TeamDto teamDto )
@@ -63,6 +66,11 @@ namespace BLL.Implementions
         public async Task<List<TeamDto>> GetAllAsync()
         {
             var teams = await _repo.GetAll();
+            foreach (var team in teams)
+            {
+                team.Players = _PlayerService.GetAllByTeamId(team.Id);
+            }
+           
             return _mapper.Map<List<TeamDto>>(teams);
         }
 

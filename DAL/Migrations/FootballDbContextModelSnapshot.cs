@@ -273,7 +273,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Player", b =>
                 {
-                    b.HasOne("DAL.Entities.Team", null)
+                    b.HasOne("DAL.Entities.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId");
                 });

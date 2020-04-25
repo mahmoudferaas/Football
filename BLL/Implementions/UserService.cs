@@ -18,7 +18,7 @@ namespace BLL.Implementions
         private UserManager<IdentityUser> _userManager;
         private readonly ApplicationSettings _appSettings;
 
-        public UserService(UserManager<IdentityUser> userManager, IOptions<ApplicationSettings> appSettings)
+        public UserService(UserManager<IdentityUser> userManager, IOptions<ApplicationSettings> appSettings )
         {
             _userManager = userManager;
             _appSettings = appSettings.Value;
@@ -41,20 +41,23 @@ namespace BLL.Implementions
                         new Claim("UserID",user.Id.ToString()),
                         new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
                     }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                    Expires = DateTime.UtcNow.AddHours(1),
+                    SigningCredentials = new SigningCredentials(
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
+                //var refreshToken = _tokenService.GenerateRefreshToken();
 
-                return new LoginOutputDto { Token = token , Status = true };
+                return new LoginOutputDto { Token = token , RefreshToken = "", Status = true };
             }
             else
                 return new LoginOutputDto { 
                     Message = "Username or password is incorrect." ,
                     Status = false,
-                    Token = String.Empty
+                    RefreshToken = string.Empty,
+                    Token = string.Empty
                 };
         }
 

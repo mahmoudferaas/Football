@@ -50,5 +50,12 @@ namespace Football.Controllers
             string userId = User.Claims.First(c => c.Type == "UserID").Value;
             return (await _userService.GetUserProfile(userId));
         }
+
+        //[Authorize]
+        //[Route("GetProfile")]
+        //public async Task<Object> RefreshToken(RefreshTokenInputDto refreshTokenInput)
+        //{
+            
+        //}
     }
 }

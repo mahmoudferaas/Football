@@ -48,9 +48,9 @@ namespace BLL.Implementions
             return await Context.Set<T>().ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate)
+        public IEnumerable<T> GetWhere(Expression<Func<T, bool>> predicate)
         {
-            return await Context.Set<T>().Where(predicate).ToListAsync();
+            return  Context.Set<T>().Where(predicate).ToList();
         }
 
         public Task<int> CountAll() => Context.Set<T>().CountAsync();

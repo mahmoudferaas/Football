@@ -9,5 +9,6 @@ namespace DAL.Entities
         public string Nationality { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Image { get; set; }
+        public Team Team { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace BLL.Abstractions
         Task Remove(T entity);
 
         Task<IEnumerable<T>> GetAll();
-        Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate);
+        IEnumerable<T> GetWhere(Expression<Func<T, bool>> predicate);
 
 
     }

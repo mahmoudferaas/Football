@@ -10,7 +10,6 @@ namespace Football.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrator")]
     public class TeamsController : ControllerBase
     {
         private readonly ITeamService _teamService;
@@ -20,6 +19,7 @@ namespace Football.Controllers
             _teamService = teamService;
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost("Create")]
         public async Task<Object> Create(TeamDto model)
         {
@@ -35,25 +35,28 @@ namespace Football.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Administrator,Visitor")]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<TeamDto>>> GetAll()
         {
             return await _teamService.GetAllAsync();
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet("GetById/{id}")]
         public async Task<ActionResult<TeamDto>> GetById(int id)
         {
             return await _teamService.GetByIdAsync(id);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut("Update/{id}")]
         public async Task<OutPutDto> Update(TeamDto TeamDto)
         {
             return await _teamService.UpdateAsync(TeamDto);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("Delete/{id}")]
         public async Task<OutPutDto> Delete(int id)
         {

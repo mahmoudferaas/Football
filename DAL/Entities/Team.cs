@@ -11,6 +11,6 @@ namespace DAL.Entities
         public DateTime FoundationDate { get; set; }
         public string CoachName { get; set; }
         public string LogoImage { get; set; }
-        public virtual ICollection<Player> Players { get; set; }
+        public virtual IEnumerable<Player> Players { get; set; }
     }
 }

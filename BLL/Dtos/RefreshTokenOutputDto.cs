@@ -1,7 +1,7 @@
 ﻿
 namespace BLL.Dtos
 {
-    public class LoginOutputDto
+    public class RefreshTokenOutputDto
     {
         public string Token { get; set; }
         public string RefreshToken { get; set; }

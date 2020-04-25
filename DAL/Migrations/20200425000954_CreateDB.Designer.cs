@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(FootballDbContext))]
-    [Migration("20200424192718_CreateDB")]
+    [Migration("20200425000954_CreateDB")]
     partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -275,7 +275,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Player", b =>
                 {
-                    b.HasOne("DAL.Entities.Team", null)
+                    b.HasOne("DAL.Entities.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId");
                 });
