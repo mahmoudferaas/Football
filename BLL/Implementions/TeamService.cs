@@ -79,7 +79,7 @@ namespace BLL.Implementions
             try
             {
                 Team team = await _repo.GetById(id);
-
+                team.Players = _PlayerService.GetAllByTeamId(team.Id);
                 return _mapper.Map<TeamDto>(team);
             }
             catch (Exception ex)
